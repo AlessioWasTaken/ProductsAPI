@@ -16,9 +16,10 @@ app.use(cookieParser());
 app.use(compression());
 app.use(cors({
     origin: [...environments().origins],
+    credentials: true // Occhio a questo da controllare
 }));
 
-app.use('/', routers());
+app.use('/api', routers());
 
 console.log(db)
 

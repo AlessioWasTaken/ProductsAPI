@@ -3,10 +3,12 @@ import devEnvironment from "./dev.environment";
 type Environment = {
     userDB: string,
     passwordDB: string,
+    databaseName: string,
     origins: string[],
     serverPort: number,
     urlDB: string,
-    portDB: number
+    portDB: number,
+    secretKey: string
 }
 
 export default () => {
