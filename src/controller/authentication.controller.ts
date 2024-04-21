@@ -29,7 +29,7 @@ export const loginController = async (req: express.Request, res: express.Respons
 
     updateSessionToken(token, email);
 
-    res.cookie('sessionToken', token, {domain: 'localhost', path: '/'});
+    res.cookie('sessionToken', token, { domain: 'localhost', path: '/', httpOnly: false, secure: false, maxAge: 1000 * 60 * 60 * 24 * 7});
 
     res.status(200).json({'message': 'Logged in', 'status': 'ok'});
 
