@@ -2,7 +2,7 @@ import { createSecretKey } from "crypto";
 
 export default {
     userDB: 'root',
-    passwordDB: '',
+    passwordDB: 'root',
     urlDB: '127.0.0.1',
     databaseName: 'appdb',
     origins: [
