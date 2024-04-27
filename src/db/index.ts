@@ -8,7 +8,7 @@ let database = mysql.createConnection({
     database: environments().databaseName,
 })
 database.connect((err) => {
-    if (err) console.log(err);
+    if(err) console.log(err);
     console.log('Connessione effeutata')
 })
 export default database;

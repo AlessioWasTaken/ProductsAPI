@@ -1,5 +1,5 @@
 import express from 'express';
-import { createOrder } from '../db/order.db';
+import { createOrder, deleteOrderById, getAllOrders, getOrderById, updateOrder } from '../db/order.db';
 import { Orders } from '../db/rowData.db';
 import { generateUniqueCode } from '../helpers/codes';
 
@@ -21,3 +21,66 @@ export const createOrderController = async (req: express.Request, res: express.R
 
     res.status(200).json({message: 'Order added succesfuly', status: 'ok'});
 };
+
+export const deleteOrderController = async (req: express.Request, res: express.Response) => {
+    const { orderID } = req.params;
+
+    if(!orderID){
+        return res.json({error: "Order ID not found", status: "ko"});
+    }
+
+    const order = await deleteOrderById(orderID);
+
+    if (order.affectedRows > 0){
+        return res.status(200).json({message: "Order deleted succesfuly", status: "ok"});
+    }else{
+        return res.json({error: "Error on deleting order", status: "ko"});
+    }
+}
+
+export const getAllOrdersController = async (req: express.Request, res: express.Response) => {
+    const orders = await getAllOrders();
+
+    if(!orders){
+        return res.status(200).json({error: "Orders not found", status: "ko"});
+    }
+
+    res.status(200).json({data: orders, status: "ok"});
+}
+export const getOrderController = async (req: express.Request, res: express.Response) => {
+    const { orderID } = req.params;
+
+    if(!orderID){
+        return res.status(200).json({error: 'Order ID missed', status: 'ko'});
+    }
+
+    const order = await getOrderById(orderID);
+
+    if(!order) {
+        return res.json({error: 'order not found', status: 'ko'});
+    }
+
+    res.status(200).json({data: order, status: 'ok'});
+}
+
+export const updateOrderController = async (req: express.Request, res: express.Response) => {
+    const { orderID } = req.params;
+    const { user, product, qta } = req.body;
+
+    if(!orderID){
+        return res.json({error: 'Order ID missing', status: 'ko'});
+    }
+
+    if (!user || !product || !qta) {
+        return res.json({error: 'missing body param', status: 'ko'});
+    }
+
+    const orderStatus = await updateOrder(orderID, user, product, qta);
+
+    if(orderStatus.affectedRows > 0){
+        return res.status(200).json({message: 'Orderd updated succesfuly', status: 'ok'});
+    }else{
+        return res.json({error: 'Error update is not done, possibily error', status: 'ko'});
+    }
+}
+

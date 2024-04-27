@@ -12,6 +12,15 @@ export const createOrder = (id: string, user: number, product: number, qta: numb
     });
 };
 
+export const updateOrder = (orderID: string, user: number, product: number, qta: number): Promise<ResultSetHeader> => {
+    return new Promise((resolve, reject) => {
+        database.query<ResultSetHeader>(`update orders set user = '${user}', product = '${product}', qta = '${qta}' where id = '${orderID}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result);
+        });
+    });
+}
+
 export const deleteOrderById = (id: string): Promise<ResultSetHeader> => {
     return new Promise((resolve, reject) => {
         database.query<ResultSetHeader>(`delete from orders where id = '${id}'`, (err, result) => {

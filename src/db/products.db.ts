@@ -52,3 +52,11 @@ export const delProduct = (productId: number): Promise<ResultSetHeader> => {
 }
 
 //Aggiungere la query di modifica totale/selettiva
+export const updateProduct = (productId: number, productName: string, description: string, type: string, img: string, price: string, stock: number): Promise<ResultSetHeader> => {
+    return new Promise((resolve, reject) => {
+        database.query<ResultSetHeader>(`UPDATE products SET productName = '${productName}', description = '${description}', type = '${type}', img = '${img}', price = '${price}', stock = '${stock}' WHERE productId = '${productId}'`, (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        });
+    });
+}

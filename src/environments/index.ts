@@ -1,10 +1,10 @@
 import devEnvironment from "./dev.environment";
+import workstationEnvironment from "./workstation.environment";
 
 type Environment = {
     userDB: string,
     passwordDB: string,
     databaseName: string,
-    origins: string[],
     serverPort: number,
     urlDB: string,
     portDB: number,
@@ -17,6 +17,9 @@ export default () => {
     switch (runningEnv) {
         case 'dev':
             envData = devEnvironment;
+            break;
+        case 'workstation':
+            envData = workstationEnvironment;
             break;
         case 'prod':
             break;
