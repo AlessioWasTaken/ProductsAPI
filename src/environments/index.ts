@@ -8,6 +8,7 @@ type Environment = {
     serverPort: number,
     urlDB: string,
     portDB: number,
+    origins: string[],
     secretKey: string
 }
 
