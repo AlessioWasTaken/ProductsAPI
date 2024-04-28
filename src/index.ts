@@ -12,6 +12,7 @@ app.use(bodyParser.json({limit: '5mb'}));
 app.use(cookieParser());
 app.use(compression());
 app.use(cors({
+    origin: 'http://localhost:5500',
     credentials: true // Occhio a questo da controllare
 }));
 
