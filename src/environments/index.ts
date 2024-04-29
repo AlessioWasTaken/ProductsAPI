@@ -1,4 +1,5 @@
 import devEnvironment from "./dev.environment";
+import laptopEnvironment from "./laptop.environment";
 import workstationEnvironment from "./workstation.environment";
 
 type Environment = {
@@ -22,6 +23,8 @@ export default () => {
         case 'workstation':
             envData = workstationEnvironment;
             break;
+        case 'laptop':
+            envData = laptopEnvironment;
         case 'prod':
             break;
     }

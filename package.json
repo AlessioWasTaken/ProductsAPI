@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon",
     "start:dev": "cross-env NODE_ENV=dev nodemon",
-    "start:workstation": "cross-env NODE_ENV=workstation nodemon"
+    "start:workstation": "cross-env NODE_ENV=workstation nodemon",
+    "start:laptop": "cross-env NODE_ENV=laptop nodemon"
   },
   "repository": {
     "type": "git",
