@@ -60,3 +60,13 @@ export const updateProduct = (productId: number, productName: string, descriptio
         });
     });
 }
+
+
+export const setStockProduct = (id: string, stock: number): Promise<ResultSetHeader> => {
+    return new Promise((resolve, reject) => {
+        database.query<ResultSetHeader>(`update products set stock = '${stock}' where productId = '${id}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result);
+        });
+    })   
+}

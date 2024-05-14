@@ -138,4 +138,3 @@ export const uploadImageFromBase64Controller = async (req:express.Request, res: 
         }
     });
 }
-
