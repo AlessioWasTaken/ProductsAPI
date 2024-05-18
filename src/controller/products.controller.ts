@@ -39,7 +39,7 @@ export const addProductController = async (req: express.Request, res: express.Re
         return res.status(200).json({message: 'Missing params', status: 'ko'});
     }
 
-    if( type != ProductType.bread || type != ProductType.drink || type != ProductType.coffee || type != ProductType.dessert || type != ProductType.water || type != ProductType.other){
+    if( type != ProductType.bread && type != ProductType.drink && type != ProductType.coffee && type != ProductType.dessert && type != ProductType.water && type != ProductType.other){
         return res.status(200).json({message: 'Type not valid', status: 'ko'});
     }
 

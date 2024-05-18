@@ -24,5 +24,7 @@ export interface Orders extends RowDataPacket {
     id?: string,
     user?: number,
     product?: number,
-    qta?: number
+    qta?: number,
+    completato?: boolean,
+    data?: Date
 }

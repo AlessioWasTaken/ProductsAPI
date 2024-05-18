@@ -1,8 +1,7 @@
 import express from 'express';
 import { completeOrderById, createOrder, deleteOrderById, getAllActiveOrders, getAllOrders, getOrderById, updateOrder } from '../db/order.db';
-import { Orders } from '../db/rowData.db';
 import { generateUniqueCode } from '../helpers/codes';
-import { setStockProduct } from '../db/products.db';
+import { getStockByID, setStockProduct } from '../db/products.db';
 
 export const createOrderController = async (req: express.Request, res: express.Response) => {
     const { user, product, qta, status, date } = req.body;
@@ -11,11 +10,17 @@ export const createOrderController = async (req: express.Request, res: express.R
         return res.json({message: 'Missing params', status: 'ko'});
     }
 
-    if(new Date(date) == undefined){
+    if(isNaN(new Date(date).getTime())){
         return res.json({message: 'Date invalid', status: 'ko'});
     }
 
-    const statusOfsetStock = await setStockProduct(product, qta);
+    if(status !== 'false' && status !== 'true'){
+        return res.json({message: 'Status invalid', status: 'ko'});
+    }
+
+    const newStock = await getStockByID(product) - qta;
+
+    const statusOfsetStock = await setStockProduct(product, newStock);
 
     if(statusOfsetStock.affectedRows == 0){
         return res.json({message: 'Error updating current stock', status: 'ko'});
@@ -85,8 +90,12 @@ export const updateOrderController = async (req: express.Request, res: express.R
         return res.json({error: 'missing body param', status: 'ko'});
     }
 
-    if(new Date(date) == undefined){
+    if(isNaN(new Date(date).getTime())){
         return res.json({message: 'Date invalid', status: 'ko'});
+    }
+
+    if(status !== 'false' && status !== 'true'){
+        return res.json({message: 'Status invalid', status: 'ko'});
     }
 
     const orderStatus = await updateOrder(orderID, user, product, qta, status, date);

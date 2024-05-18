@@ -70,3 +70,12 @@ export const setStockProduct = (id: string, stock: number): Promise<ResultSetHea
         });
     })   
 }
+
+export const getStockByID = (id: string): Promise<number> => {
+    return new Promise((resolve, reject) => {
+        database.query<Products[]>(`select stock from products where productId = '${id}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result[0]['stock'])
+        })
+    })
+}
