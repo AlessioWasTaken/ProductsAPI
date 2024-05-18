@@ -7,5 +7,5 @@ export const productsRoute = (router: express.Router) => {
     router.get('/v1/products/:productId', isAuthenticated, getProductController);
     router.post('/v1/products/add', isAuthenticated, addProductController);
     router.delete('/v1/products/delete/:productId', isAuthenticated, deleteProductController);
-    router.patch('/v1/products/update/:productId', isAuthenticated, updateProductController);
+    router.post('/v1/products/update/:productId', isAuthenticated, updateProductController);
 };

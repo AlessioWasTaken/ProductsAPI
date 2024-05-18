@@ -1,12 +1,13 @@
 import express from 'express';
-import { completeOrderById, createOrder, deleteOrderById, getAllActiveOrders, getAllOrders, getOrderById, updateOrder } from '../db/order.db';
+import { completeOrderById, createOrder, deleteOrderById, getAllActiveOrders, getAllActiveOrdersByUser, getAllOrders, getOrderById, updateOrder } from '../db/order.db';
 import { generateUniqueCode } from '../helpers/codes';
 import { getStockByID, setStockProduct } from '../db/products.db';
+import { RequestWithUser } from '../types/requestWithUser.type';
 
-export const createOrderController = async (req: express.Request, res: express.Response) => {
+export const createOrderController = async (req: RequestWithUser, res: express.Response) => {
     const { user, product, qta, status, date } = req.body;
 
-    if (!user || !product || !qta || !status || !date) {
+    if (!product || !qta || !status || !date) {
         return res.json({message: 'Missing params', status: 'ko'});
     }
 
@@ -28,7 +29,7 @@ export const createOrderController = async (req: express.Request, res: express.R
 
     const orderCode = await generateUniqueCode();
 
-    const statusOrder = await createOrder(orderCode, user, product, qta, status, date);
+    const statusOrder = await createOrder(orderCode, !user ? req.user.userId : user, product, qta, status, date);
 
     if(statusOrder.affectedRows === 0){
         return res.json({error: 'Order not added prossibile query error', status: 'ko'});
@@ -134,3 +135,12 @@ export const completeOrderController = async (req: express.Request, res: express
     res.status(200).json({message: 'Order completed successfuly', status: 'ok'});
 }
 
+export const getOrderByCurrentUser = async (req: RequestWithUser, res: express.Response) => {
+    const orders = await getAllActiveOrdersByUser(req.user.userId);
+
+    if(!orders){
+        return res.json({message: 'Order not found', status: 'ok'});
+    }
+
+    res.status(200).json({data: orders, status: 'ok'});
+}

@@ -6,7 +6,6 @@ import express from 'express';
 import routers from "./routers";
 
 import environments from "./environments";
-import { getStockByID } from "./db/products.db";
 const app = express();
 
 app.use(bodyParser.json({limit: '5mb'}));
