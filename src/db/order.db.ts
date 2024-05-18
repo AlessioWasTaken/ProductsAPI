@@ -78,3 +78,12 @@ export const getAllActiveOrders = (): Promise<Orders[] | undefined> => {
         });
     });
 };
+
+export const getAllActiveOrdersByUser = (user: string): Promise<Orders[] | undefined> => {
+    return new Promise((resolve, reject) => {
+        database.query<Orders[]>(`select * from orders where completato = false and user = '${user}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result);
+        })
+    })
+}

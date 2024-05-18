@@ -13,7 +13,7 @@ export const getAllProductsController = async (req: express.Request, res: expres
         return res.status(200).json({'message': 'No products found', 'status': 'ko'});
     }
 
-    res.status(200).json(products);
+    res.status(200).json({data: products, status: 'ok'});
 };
 
 export const getProductController = async (req: express.Request, res: express.Response) => {
