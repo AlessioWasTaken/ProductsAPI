@@ -60,3 +60,22 @@ export const updateProduct = (productId: number, productName: string, descriptio
         });
     });
 }
+
+
+export const setStockProduct = (id: string, stock: number): Promise<ResultSetHeader> => {
+    return new Promise((resolve, reject) => {
+        database.query<ResultSetHeader>(`update products set stock = '${stock}' where productId = '${id}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result);
+        });
+    })   
+}
+
+export const getStockByID = (id: string): Promise<number> => {
+    return new Promise((resolve, reject) => {
+        database.query<Products[]>(`select stock from products where productId = '${id}'`, (err, result) => {
+            if(err) reject(err);
+            resolve(result[0]['stock'])
+        })
+    })
+}
