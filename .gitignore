@@ -1,3 +1,6 @@
 node_modules
 # Keep environment variables out of version control
 .env
+
+# Perche ancora in via di sviluppo in caso sia stabile e non cambi il db allor si rimuove
+public/
