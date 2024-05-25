@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "start:dev": "cross-env NODE_ENV=dev nodemon",
-    "start:workstation": "cross-env NODE_ENV=workstation nodemon",
-    "start:laptop": "cross-env NODE_ENV=laptop nodemon"
+    "dev": "cross-env NODE_ENV=dev nodemon",
+    "workstation": "cross-env NODE_ENV=workstation nodemon",
+    "laptop": "cross-env NODE_ENV=laptop nodemon"
   },
   "repository": {
     "type": "git",

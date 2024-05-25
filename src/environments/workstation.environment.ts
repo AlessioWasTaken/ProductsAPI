@@ -1,8 +1,8 @@
 export default {
     userDB: 'root',
-    passwordDB: 'root',
+    passwordDB: '',
     urlDB: '127.0.0.1',
-    databaseName: 'AppBE',
+    databaseName: 'AppBarDB',
     serverPort: 8080,
     portDB: 3306,
     origins: [
