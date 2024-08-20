@@ -1,7 +1,7 @@
 {
-  "name": "app-be",
+  "name": "products-api",
   "version": "1.0.0",
-  "description": "Backend per gestire le chiamate che usera l'app per mostrare le info",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
@@ -9,16 +9,8 @@
     "workstation": "cross-env NODE_ENV=workstation nodemon",
     "laptop": "cross-env NODE_ENV=laptop nodemon"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/AlessioSarica/App-BE.git"
-  },
   "author": "Alessio Sarica",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlessioSarica/App-BE/issues"
-  },
-  "homepage": "https://github.com/AlessioSarica/App-BE#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
